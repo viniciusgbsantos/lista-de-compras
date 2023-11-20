@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    min-height: 100vh;
+    color:#e1e1e1;
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: rubik, sans-serif;
+}
+h1{
+  color: white;
+}
+.container{
+  width: 100%;
+  min-height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.form{
+  width: 80vw;
+  margin: 10px auto;
+}
+input{
+  background-color: #474747;
+  color: white;
+  padding: 11px;
+  text-align: left;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  border: 2px solid #474747;
+}
+label {
+  font-size: 3vmin;
+  margin: 10px;
+}
+input:hover, select:hover{
+  box-shadow: 0px 0px 18px 5px #9A9B9B;
+  transition: .4s ease-in-out;
+}
+input:focus, select:focus{
+  border: 2px solid white;
+  box-shadow: 0px 0px 18px 5px #77787a;
+  outline: 0;
+}
+
+select {
+  background-color: #474747;
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+.btnadd {
+  font-size: 22px;
+  padding: 9px 16px;
+  margin: 0 10px;
+  background-color: #b61ff0;
+  color: white;
+  border: 2px solid #b61ff0;
+  border-radius: 10px;
+  transition: .4s ease;
+}
+.btnadd:hover{
+  background-color: transparent;
+  cursor: pointer;
+  transition: .4s ease;
+}
+.btnx {
+  font-size: 16px;
+  padding: 4px 8px;
+  margin: 0 10px;
+  background-color: #b61ff0;
+  background-color: transparent;
+  color: white;
+  border: 2px solid #b61ff0;
+  border-radius: 10px;
+  transition: .4s ease;
+}
+.btnx:hover{
+  box-shadow: 0 0 1em #9A9B9B;
+  cursor: pointer;
+  transition: .4s ease;
+}
+.quantidade, .categoria{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+}
+.unidade{
+  margin-left: 10px;
+}
+ul{
+  list-style-type: none
+}
+li{
+  font-size: 16px;
+  padding: 5px;
+  padding: auto 5px;
+}
+.check{
+  margin: 0 7px;
+  width: 18px;
+  height: 18px;
+}
+@media screen  and (max-width: 700px) {
+  label, li{
+    font-size: 22px
+  }
+  .quantidade, .categoria{
+    display: flex;
+    flex-direction: column;
+  }
+  select{
+    margin: 0 auto;
+  }
+  .btnadd{
+    margin-top: 20px;
+  }
+}
+
+
+
