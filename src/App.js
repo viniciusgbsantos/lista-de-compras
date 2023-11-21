@@ -5,6 +5,7 @@ const ShoppingList = () => {
   const [title, setTitle] = useState('');
   const [quantity, setQuantity] = useState('');
   const [unit, setUnit] = useState('');
+  const [purchased, setPurchased] = useState(false);
   const [category, setCategory] = useState('');
   const [shoppingItems, setShoppingItems] = useState([]);
 
@@ -51,7 +52,9 @@ const ShoppingList = () => {
   };
       
   function handleCheckItem(item) {
-    itemFetch.patch(`/items/${item}`, { purchased: !item.purchased })
+    itemFetch.patch(`/items/${item}`, { purchased: !item.purchased });
+    getList(); 
+    setPurchased();
   }
 
   function handleRemoveItem(item){
@@ -119,7 +122,8 @@ const ShoppingList = () => {
             <input
             className='check'
               type="checkbox"
-              onChange={() => handleCheckItem(post.id)}
+              checked={post.purchased || false}
+              onChange={(e) => handleCheckItem(post.purchased)}
             />
             {post.title} - {post.quantity} - {post.unit} - {post.category}
             <button className='btnx' onClick={(e) => handleRemoveItem(post.id)}>X</button>
