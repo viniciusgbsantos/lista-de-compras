@@ -7,12 +7,7 @@ const ShoppingList = () => {
   const [unit, setUnit] = useState('');
   const [category, setCategory] = useState('');
   const [shoppingItems, setShoppingItems] = useState([]);
-  const [check, setCheck] = useState(
-    shoppingItems.map((post) => ({
-      id: post.id,
-      active: false
-    }))
-  )
+
   
   const getList = async () => {
     try {
@@ -55,55 +50,15 @@ const ShoppingList = () => {
     }
   };
       
-
-  function handleCheckItem(id) {
-    try {
-      const updatedCheck = check.map((post) => {
-        if (post.id === id) {
-          const updatedItem = { ...post, purchased: !post.purchased };
-  
-          itemFetch.put(`/items/${id}`, { purchased: updatedItem.purchased })
-            .then(response => {
-              if (response.status === 200 || response.status === 204) {
-                console.log('Item marcado/desmarcado com sucesso na API!');
-              } else {
-                console.error('Falha ao marcar/desmarcar o item na API. Status:', response.status);
-              }
-            })
-            .catch(error => {
-              console.error('Erro ao marcar/desmarcar o item na API:', error.message);
-            });
-  
-          return updatedItem;
-        } else {
-          return post;
-        }
-      });
-  
-      setCheck(updatedCheck);
-    } catch (error) {
-      console.error('Erro ao marcar/desmarcar o item:', error.message);
-    }
+  function handleCheckItem(item) {
+    itemFetch.patch(`/items/${item}`, { purchased: !item.purchased })
   }
 
-  const handleRemoveItem = async (index) => {
+  function handleRemoveItem(item){
+    itemFetch.delete(`/items/${item}`);
+    getList();
 
-    try {
-      const itemId = shoppingItems[index].id;
-      const response = await itemFetch.delete(`/items/${itemId}`);
-      
-      if (response.status === 200 || response.status === 204) {
-        console.log('Item removido');
-        getList();
-        setShoppingItems(response);
-
-      }else{
-        console.log('Falha ao remover o item. Status:', response.status)
-      } 
-    } catch (error) {
-      console.error('Erro ao remover o item: ', error.message);
-    }
-  };
+  }
 
   return (
     <div className='container'>
