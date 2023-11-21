@@ -55,24 +55,47 @@ const ShoppingList = () => {
     }
   };
       
+
   function handleCheckItem(id) {
-    const newCheck = check.map((check) => {
-      return (check.id === id ? { ...check,
-        active: true
-      } : check)
-    })
-    setCheck(newCheck)
+    try {
+      const updatedCheck = check.map((post) => {
+        if (post.id === id) {
+          const updatedItem = { ...post, purchased: !post.purchased };
+  
+          itemFetch.put(`/items/${id}`, { purchased: updatedItem.purchased })
+            .then(response => {
+              if (response.status === 200 || response.status === 204) {
+                console.log('Item marcado/desmarcado com sucesso na API!');
+              } else {
+                console.error('Falha ao marcar/desmarcar o item na API. Status:', response.status);
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao marcar/desmarcar o item na API:', error.message);
+            });
+  
+          return updatedItem;
+        } else {
+          return post;
+        }
+      });
+  
+      setCheck(updatedCheck);
+    } catch (error) {
+      console.error('Erro ao marcar/desmarcar o item:', error.message);
+    }
   }
 
   const handleRemoveItem = async (index) => {
 
     try {
       const itemId = shoppingItems[index].id;
-      const response = await itemFetch.delete(`/items/:${itemId}`);
-
+      const response = await itemFetch.delete(`/items/${itemId}`);
+      
       if (response.status === 200 || response.status === 204) {
         console.log('Item removido');
         getList();
+        setShoppingItems(response);
 
       }else{
         console.log('Falha ao remover o item. Status:', response.status)
@@ -144,7 +167,7 @@ const ShoppingList = () => {
               onChange={() => handleCheckItem(post.id)}
             />
             {post.title} - {post.quantity} - {post.unit} - {post.category}
-            <button className='btnx' onClick={(e) => handleRemoveItem()}>X</button>
+            <button className='btnx' onClick={(e) => handleRemoveItem(post.id)}>X</button>
           </li>
         )))}
       </ul>
