@@ -83,11 +83,11 @@ const ShoppingList = () => {
             />
           </div>
           <div className='unidade'>
-            <select
+            <select className='unidade-select'
               value={unit}
               onChange={(e) => setUnit(e.target.value)}
             >
-              <option value="">Selecione...</option>
+              <option value="">Un.</option>
               <option value="kilo">Kilo</option>
               <option value="grama">Grama</option>
               <option value="unidade">Unidade</option>
@@ -112,7 +112,7 @@ const ShoppingList = () => {
           <option value="Rotisseria">Rotisseria</option>
         </select>
         <button className='btnadd' type="button" onClick={(e) => handleAddItem(e)}>
-          Adicionar
+        +
         </button>
         </div>
       </div>
